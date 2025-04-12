@@ -1,0 +1,150 @@
+/* Basic Reset & Body */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Light background */
+    display: flex; /* Use flexbox to center container */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    color: #333;
+}
+
+/* Authentication Container */
+.auth-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Limit width */
+    text-align: center;
+}
+
+h2 {
+    color: #2c3e50; /* Darker heading */
+    margin-bottom: 25px;
+}
+
+/* Form Styling */
+form {
+    text-align: left; /* Align labels and inputs left */
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.9em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #3498db; /* Highlight focus */
+    outline: none;
+}
+
+/* Terms and Conditions Checkbox */
+.form-group.terms {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px; /* More space before button */
+}
+
+.form-group.terms input[type="checkbox"] {
+    margin-right: 10px;
+    width: auto; /* Don't make checkbox full width */
+    accent-color: #3498db; /* Style checkbox color */
+}
+
+.form-group.terms label {
+    margin-bottom: 0; /* Reset margin for checkbox label */
+    font-weight: normal;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.form-group.terms a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.form-group.terms a:hover {
+    text-decoration: underline;
+}
+
+/* Button Styling */
+.btn {
+    background-color: #3498db; /* Blue theme button */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make button full width */
+    margin-top: 10px; /* Space above button */
+}
+
+.btn:hover {
+    background-color: #2980b9; /* Darker blue */
+}
+
+/* Link to switch between Login/Sign Up */
+.switch-link {
+    margin-top: 25px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.switch-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-link a:hover {
+    text-decoration: underline;
+}
+
+/* Optional: Forgot Password Link */
+.forgot-password {
+    text-align: right;
+    margin-top: -10px; /* Pull it up slightly */
+    margin-bottom: 15px;
+    font-size: 0.85em;
+}
+
+.forgot-password a {
+     color: #777;
+     text-decoration: none;
+}
+
+.forgot-password a:hover {
+     text-decoration: underline;
+     color: #3498db;
+}

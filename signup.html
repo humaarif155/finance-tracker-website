@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Finance Tracker</title>
+    <link rel="stylesheet" href="auth_style.css"> <!-- We'll create this CSS file -->
+</head>
+
+<script src="auth_script.js"></script>
+
+<body>
+    <div class="auth-container">
+        <h2>Create Your Account</h2>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <!-- Optional: Add password confirmation field -->
+                <!--
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                -->
+            </div>
+            <div class="form-group terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree with the <a href="#" target="_blank">Terms</a> and <a href="#" target="_blank">Privacy Policy</a></label>
+                <!-- Replace # with actual links to your terms/policy pages -->
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p class="switch-link">
+            Already have an account? <a href="login.html">Log In</a>
+        </p>
+    </div>
+
+    <!-- Optional: Link to a JS file for form validation/submission later -->
+    <!-- <script src="auth_script.js"></script> -->
+</body>
+</html>
