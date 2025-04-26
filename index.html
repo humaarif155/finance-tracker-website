@@ -83,13 +83,75 @@
          </section>
          <section id="activity" class="content-section">
              <h2>Full Activity History</h2>
-             <p>A more detailed or filterable view of all transactions could go here.</p>
-             <!-- Consider adding a more comprehensive list/table here -->
+
+             <!-- Filter and Download Options -->
+             <div class="table-controls">
+                 <select id="filter-type">
+                     <option value="all">All</option>
+                     <option value="income">Income</option>
+                     <option value="expense">Expense</option>
+                 </select>
+                 <button id="download-table-btn" class="btn">Download Table</button>
+             </div>
+
+             <!-- Transaction History Table -->
+             <table id="transaction-history">
+                 <thead>
+                     <tr>
+                         <th>Date</th>
+                         <th>Category</th>
+                         <th>Type</th>
+                         <th>Amount</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <!-- Transactions will be dynamically added here -->
+                 </tbody>
+             </table>
          </section>
          <section id="settings" class="content-section">
              <h2>Settings</h2>
-             <p>Options like currency, categories, or data reset will go here.</p>
-             <button id="reset-data-btn" class="btn">Reset All Data</button>
+
+             <!-- Currency Change Section -->
+             <div class="settings-section">
+                 <h3>Currency</h3>
+                 <div class="form-group">
+                     <label for="currency-select">Change Currency:</label>
+                     <select id="currency-select">
+                         <option value="GBP" selected>GBP (£)</option>
+                         <option value="USD">USD ($)</option>
+                         <option value="EUR">EUR (€)</option>
+                         <option value="JPY">JPY (¥)</option>
+                         <option value="AUD">AUD (A$)</option>
+                     </select>
+                 </div>
+             </div>
+
+             <!-- Manage Categories Section -->
+             <div class="settings-section">
+                 <h3>Categories</h3>
+                 <div class="form-group">
+                     <label for="categories-list">Manage Categories:</label>
+                     <ul id="categories-list">
+                         <li>Food</li>
+                         <li>Bills</li>
+                         <li>Grocery</li>
+                         <li>Transport</li>
+                         <li>Entertainment</li>
+                         <li>Shopping</li>
+                         <li>Other</li>
+                     </ul>
+                     <input type="text" id="new-category" placeholder="Add new category">
+                     <button id="add-category-btn" class="btn">Add Category</button>
+                 </div>
+             </div>
+
+             <!-- Reset All Data Section -->
+             <div class="settings-section">
+                 <h3>Reset Data</h3>
+                 <p>Reset all income and expense data. This action cannot be undone.</p>
+                 <button id="reset-data-btn" class="btn btn-danger">Reset All Data</button>
+             </div>
          </section>
          <section id="support" class="content-section">
              <h2>Support</h2>

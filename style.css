@@ -50,23 +50,31 @@ body {
 
 /* --- Right Sidebar --- */
 #right-sidebar {
-    width: 280px; /* Width for the right sidebar */
-    height: 100vh;
     position: fixed;
-    right: 0;
     top: 0;
-    background-color: #f8f9fa; /* Light background */
-    border-left: 1px solid #e0e0e0; /* Separator line */
-    padding: 25px 20px; /* Internal padding */
-    display: flex; /* Default display is flex (visible) */
-    flex-direction: column;
-    gap: 25px; /* Space between items */
-    overflow-y: auto; /* Allow scrolling */
-    z-index: 99; /* Below left navbar if they overlap somehow */
-    /* Add transition for smoother appearance/disappearance */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: translateX(0); /* Start visible */
-    opacity: 1;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#right-sidebar h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+#right-sidebar canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
 /* Add a class to hide the sidebar smoothly */
@@ -109,6 +117,35 @@ body {
     /* max-height: 300px; /* Constrain chart height if needed */
 }
 
+/* --- Right Navigation Sidebar (Right) --- */
+#right-navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%; /* Full height */
+    background-color: #f4f4f4;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px; /* Space between elements */
+}
+
+#right-navbar h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#right-navbar .chart-container {
+    width: 100%;
+    height: 300px; /* Adjust height for the pie chart */
+    position: relative;
+}
 
 /* --- Main Content Area (Adjusted) --- */
 #main-content {
@@ -215,6 +252,193 @@ body {
     position: relative; /* Needed for chart responsiveness */
 }
 
+/* Style for the transaction history table */
+#transaction-history {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: left;
+}
+
+#transaction-history th, #transaction-history td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+#transaction-history th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #333;
+}
+
+#transaction-history tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#transaction-history tr:hover {
+    background-color: #f1f1f1;
+}
+
+#transaction-history td {
+    color: #555;
+}
+
+/* Style for income and expense amounts in the transaction history table */
+#transaction-history .income {
+    color: #27ae60; /* Green for income */
+    font-weight: bold;
+}
+
+#transaction-history .expense {
+    color: #c0392b; /* Red for expense */
+    font-weight: bold;
+}
+
+/* Add hover effect for table rows */
+#transaction-history tr:hover {
+    background-color: #f0f8ff; /* Light blue highlight */
+    cursor: pointer; /* Optional: Add pointer cursor */
+}
+
+/* Center the table in the activity section */
+#activity .content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#transaction-history {
+    max-width: 90%;
+    overflow-x: auto;
+}
+
+/* Style for table controls (filter and download button) */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.table-controls label {
+    font-size: 1em;
+    margin-right: 10px;
+    color: #333;
+}
+
+.table-controls select {
+    padding: 8px 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.table-controls .btn {
+    padding: 8px 15px;
+    font-size: 1em;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.table-controls .btn:hover {
+    background-color: #2980b9;
+}
+
+/* Ensure the table and controls align properly */
+#activity .table-controls {
+    display: flex;
+    justify-content: flex-end; /* Align filter and download button to the right */
+    gap: 10px; /* Add spacing between the dropdown and button */
+    margin-bottom: 15px;
+    width: 100%; /* Ensure it spans the full width */
+}
+
+/* General Settings Section Styling */
+.settings-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.settings-section h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.settings-section .form-group {
+    margin-bottom: 15px;
+}
+
+.settings-section label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.settings-section select,
+.settings-section input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.settings-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.settings-section ul li {
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #333;
+}
+
+.settings-section ul li:hover {
+    background-color: #f0f8ff;
+}
+
+.settings-section .btn {
+    padding: 10px 15px;
+    font-size: 1em;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.settings-section .btn:hover {
+    background-color: #2980b9;
+}
+
+.settings-section .btn-danger {
+    background-color: #e74c3c;
+}
+
+.settings-section .btn-danger:hover {
+    background-color: #c0392b;
+}
 
 /* --- Responsive Adjustments --- */
 

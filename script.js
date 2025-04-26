@@ -212,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         transactions.push(newTransaction);
         saveTransactions();
         init(); // Re-initialize display (updates summary, activity list, and chart)
+        renderPieChart(); // Ensure the pie chart is updated
         clearInputs(type);
         return true;
     }
@@ -323,6 +324,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 activityList.innerHTML = '<li>No transactions yet.</li>';
             }
         }
+
+        // Populate transaction history table in the activity section
+        updateTransactionHistory();
+
         updateSummary(); // Update summary boxes (if elements exist)
         renderPieChart(); // Render/update the pie chart (if canvas exists)
 
@@ -379,3 +384,126 @@ document.addEventListener('DOMContentLoaded', () => {
     init(); // Call init to load data, render chart, and set initial sidebar state
 
 }); // End DOMContentLoaded
+
+// Array to store transactions
+let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+// Function to add a transaction
+function addTransaction(type, amount, category = null) {
+    const numericAmount = +amount;
+    if (isNaN(numericAmount) || numericAmount <= 0) {
+        alert('Please enter a valid positive amount.');
+        return false;
+    }
+    if (type === 'expense' && !category) {
+        alert('Please select a category for the expense.');
+        return false;
+    }
+    const newTransaction = {
+        id: generateID(),
+        type,
+        amount: numericAmount,
+        category: type === 'expense' ? category : null,
+        timestamp: new Date().toISOString()
+    };
+    transactions.push(newTransaction);
+    saveTransactions();
+    init(); // Re-initialize display (updates summary, activity list, and chart)
+    renderPieChart(); // Ensure the pie chart is updated
+    clearInputs(type);
+    return true;
+}
+
+// Function to update the transaction history table with filtering
+function updateTransactionHistory() {
+    const tableBody = document.querySelector("#transaction-history tbody");
+    const filterType = document.getElementById("filter-type").value; // Get selected filter type
+    if (!tableBody) return;
+
+    tableBody.innerHTML = ""; // Clear existing rows
+
+    // Filter transactions based on the selected type
+    const filteredTransactions = transactions.filter(transaction => {
+        return filterType === "all" || transaction.type.toLowerCase() === filterType;
+    });
+
+    filteredTransactions.forEach((transaction) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${new Date(transaction.timestamp).toLocaleDateString()}</td>
+            <td>${transaction.category || "N/A"}</td>
+            <td>${transaction.type}</td>
+            <td class="${transaction.type.toLowerCase()}">£${transaction.amount.toFixed(2)}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Event listener for filter dropdown
+document.getElementById("filter-type").addEventListener("change", updateTransactionHistory);
+
+// Event listeners for adding income and expenses
+document.getElementById("add-income-btn").addEventListener("click", () => {
+    const incomeAmount = document.getElementById("income-amount").value;
+    if (incomeAmount && incomeAmount > 0) {
+        addTransaction("Income", incomeAmount);
+        document.getElementById("income-amount").value = ""; // Clear input
+    }
+});
+
+document.getElementById("add-expense-btn").addEventListener("click", () => {
+    const expenseAmount = document.getElementById("expense-amount").value;
+    const expenseCategory = document.getElementById("expense-category").value;
+    if (expenseAmount && expenseAmount > 0 && expenseCategory) {
+        addTransaction("Expense", expenseAmount, expenseCategory);
+        document.getElementById("expense-amount").value = ""; // Clear input
+        document.getElementById("expense-category").value = ""; // Reset dropdown
+    }
+});
+
+addIncomeBtn.addEventListener("click", () => {
+    const incomeAmount = incomeAmountInput.value;
+    if (incomeAmount && incomeAmount > 0) {
+        addTransaction("income", incomeAmount);
+        saveTransactions();
+        updateTransactionHistory();
+        incomeAmountInput.value = ""; // Clear input
+    }
+});
+
+addExpenseBtn.addEventListener("click", () => {
+    const expenseAmount = expenseAmountInput.value;
+    const expenseCategory = expenseCategorySelect.value;
+    if (expenseAmount && expenseAmount > 0 && expenseCategory) {
+        addTransaction("expense", expenseAmount, expenseCategory);
+        renderPieChart(); // Ensure the pie chart is updated
+        saveTransactions();
+        updateTransactionHistory();
+        expenseAmountInput.value = ""; // Clear input
+        expenseCategorySelect.value = ""; // Reset dropdown
+    }
+});
+
+// Handle currency change
+document.getElementById("currency-select").addEventListener("change", (event) => {
+    const selectedCurrency = event.target.value;
+    localStorage.setItem("currency", selectedCurrency); // Save currency to localStorage
+    alert(`Currency changed to ${selectedCurrency}`);
+});
+
+// Handle adding new categories
+document.getElementById("add-category-btn").addEventListener("click", () => {
+    const newCategoryInput = document.getElementById("new-category");
+    const newCategory = newCategoryInput.value.trim();
+
+    if (newCategory) {
+        const categoriesList = document.getElementById("categories-list");
+        const newCategoryItem = document.createElement("li");
+        newCategoryItem.textContent = newCategory;
+        categoriesList.appendChild(newCategoryItem);
+
+        newCategoryInput.value = ""; // Clear input field
+    } else {
+        alert("Please enter a valid category name.");
+    }
+});

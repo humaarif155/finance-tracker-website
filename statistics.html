@@ -13,45 +13,63 @@
 </head>
 <body>
 
-    <!-- Vertical Navigation Sidebar (Left) - Copied from index.html -->
+    <!-- Vertical Navigation Sidebar (Left) -->
     <nav id="navbar">
         <div class="nav-header">
             <h2>Finance Tracker</h2>
         </div>
         <ul>
-            <!-- Update hrefs for page navigation -->
             <li><a href="index.html" class="nav-link" data-target="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="statistics.html" class="nav-link active" data-target="statistics"><i class="fas fa-chart-bar"></i> Statistics</a></li> <!-- Mark as active -->
-            <li><a href="index.html#activity" class="nav-link" data-target="activity"><i class="fas fa-history"></i> Activity</a></li> <!-- Link back to index section -->
-            <li><a href="index.html#settings" class="nav-link" data-target="settings"><i class="fas fa-cog"></i> Settings</a></li> <!-- Link back to index section -->
+            <li><a href="statistics.html" class="nav-link active" data-target="statistics"><i class="fas fa-chart-bar"></i> Statistics</a></li>
+            <li><a href="index.html#activity" class="nav-link" data-target="activity"><i class="fas fa-history"></i> Activity</a></li>
+            <li><a href="index.html#settings" class="nav-link" data-target="settings"><i class="fas fa-cog"></i> Settings</a></li>
             <hr class="nav-separator">
-            <li><a href="index.html#support" class="nav-link" data-target="support"><i class="fas fa-headset"></i> Support</a></li> <!-- Link back to index section -->
-            <li><a href="index.html#contact" class="nav-link" data-target="contact"><i class="fas fa-envelope"></i> Contact Us</a></li> <!-- Link back to index section -->
-            <li><a href="index.html#privacy" class="nav-link" data-target="privacy"><i class="fas fa-lock"></i> Privacy</a></li> <!-- Link back to index section -->
+            <li><a href="index.html#support" class="nav-link" data-target="support"><i class="fas fa-headset"></i> Support</a></li>
+            <li><a href="index.html#contact" class="nav-link" data-target="contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+            <li><a href="index.html#privacy" class="nav-link" data-target="privacy"><i class="fas fa-lock"></i> Privacy</a></li>
         </ul>
         <div class="nav-footer">
-             <!-- Use JS for logout functionality if needed on this page too, or link back -->
-             <button id="logout-btn-stats" class="btn btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button id="logout-btn-stats" class="btn btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </nav>
 
     <!-- Main Content Area -->
     <main id="main-content">
         <!-- Statistics Section Content -->
-        <section id="statistics-content" class="content-section active"> <!-- Use different ID -->
-             <h2>Statistics Summary</h2>
-             <p>Overview of your financial status.</p>
+        <section id="statistics-content" class="content-section active">
+            <h2>Statistics Summary</h2>
+            <h3>Overview of your financial status.</h3>
 
-             <div class="chart-container stats-bar-chart">
-                 <canvas id="summaryBarChart"></canvas>
-                 <p id="no-chart-data" style="display: none; text-align: center; margin-top: 20px; color: #777;">No transaction data available to display chart.</p>
-             </div>
+            <!-- Bar Chart -->
+            <div class="chart-container stats-bar-chart">
+                <canvas id="summaryBarChart"></canvas>
+                <p id="no-chart-data" style="display: none; text-align: center; margin-top: 20px; color: #777;">No transaction data available to display chart.</p>
+            </div>
 
-             <!-- You could add more stats elements here if needed -->
+            <!-- Line Chart -->
+            <div class="chart-container stats-line-chart">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Income vs Expenses</h3>
+                    <select id="timeframe-select">
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly" selected>Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                </div>
+                <canvas id="incomeExpensesLineChart"></canvas>
+                <p id="no-line-chart-data" style="display: none; text-align: center; margin-top: 20px; color: #777;">No transaction data available to display line chart.</p>
+            </div>
+        </section>
 
-         </section>
-
-    </main> <!-- End Main Content Area -->
+        <!-- Expense Breakdown Section (Right-Aligned) -->
+        <aside id="right-sidebar" >
+            <!-- Pie Chart Section -->
+            <h3 style="margin-top: 20px;">Expense Breakdown</h3>
+            <canvas id="expensePieChart" style="max-width: 100%;"></canvas>
+            <p id="no-pie-chart-data" style="display: none; text-align: center; margin-top: 20px; color: #777;">No expense data available to display pie chart.</p>
+        </aside>
+            
+    </main>
 
     <!-- Link to the NEW statistics-specific JavaScript file -->
     <script src="stats_script.js"></script>
