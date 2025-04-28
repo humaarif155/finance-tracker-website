@@ -514,3 +514,54 @@ body {
         height: 250px;
     }
 }
+
+/* Saving Goals Container */
+.saving-goals-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.saving-goals-container h3 {
+    margin-bottom: 10px;
+}
+
+.saving-goals-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.saving-goals-container li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saving-goals-container .add-saving-goal {
+    margin-top: 15px;
+}
+
+.saving-goals-container .add-saving-goal input {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.saving-goals-container .add-saving-goal button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.saving-goals-container .add-saving-goal button:hover {
+    background-color: #0056b3;
+}

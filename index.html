@@ -155,16 +155,31 @@
          </section>
          <section id="support" class="content-section">
              <h2>Support</h2>
-             <p>Support information goes here.</p>
+             <p>Still in progress</p>
          </section>
          <section id="contact" class="content-section">
-             <h2>Contact Us</h2>
-             <p>Contact details go here.</p>
-         </section>
-         <section id="privacy" class="content-section">
-             <h2>Privacy Policy</h2>
-             <p>Your privacy policy goes here.</p>
-         </section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to reach out to us using the information below:</p>
+            <div class="contact-container">
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <span><strong>Email:</strong> support@financetracker.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    <span><strong>Phone:</strong> +971 54 299 2323</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <span><strong>Address:</strong> 123 Finance Street, Dubai, UAE</span>
+                </div>
+            </div>
+            <p>We are here to help you Monday through Friday, 9:00 AM to 5:00 PM (GMT).</p>
+        </section>
+        <section id="privacy" class="content-section">
+            <h2>Privacy</h2>
+            <p>Still in progress</p>
+        </section>
 
     </main> <!-- End Main Content Area -->
 
@@ -208,6 +223,22 @@
                 </select>
             </div>
              <button id="add-expense-btn" class="btn">Add Expense</button>
+        </div>
+
+        <!-- Saving Goals Section -->
+        <div class="saving-goals-container">
+            <h3>Saving Goals</h3>
+            <ul id="saving-goals-list">
+                <li>No saving goals yet.</li>
+            </ul>
+            <div class="add-saving-goal">
+                <h4>Add New Saving Goal</h4>
+                <label for="saving-goal-name">Goal Name:</label>
+                <input type="text" id="saving-goal-name" placeholder="e.g., Vacation">
+                <label for="saving-goal-amount">Target Amount:</label>
+                <input type="number" id="saving-goal-amount" placeholder="e.g., 1000" step="0.01" min="0">
+                <button id="add-saving-goal-btn" class="btn">Add Goal</button>
+            </div>
         </div>
     </aside> <!-- End Right Sidebar -->
 

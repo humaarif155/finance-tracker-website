@@ -25,11 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn'); // Main logout button in left nav
     const pieChartCanvas = document.getElementById('expensePieChart');
     const noChartDataMsg = document.getElementById('no-chart-data');
+    const savingGoalsList = document.getElementById('saving-goals-list');
 
     // --- Data Storage & Chart Instance ---
     // Define transactions globally within the scope of this script
     let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
     let expensePieChartInstance = null;
+    const savingGoals = [];
 
     // --- Functions ---
 
@@ -383,7 +385,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init(); // Call init to load data, render chart, and set initial sidebar state
 
-}); // End DOMContentLoaded
+    // Add Saving Goal
+    document.getElementById('add-saving-goal-btn').addEventListener('click', () => {
+        const goalName = document.getElementById('saving-goal-name').value;
+        const goalAmount = parseFloat(document.getElementById('saving-goal-amount').value);
+
+        if (goalName && goalAmount > 0) {
+            savingGoals.push({ name: goalName, target: goalAmount, saved: 0 });
+            updateSavingGoalsUI();
+        }
+    });
+
+    // Update Saving Goals UI
+    function updateSavingGoalsUI() {
+        savingGoalsList.innerHTML = '';
+        savingGoals.forEach((goal, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <strong>${goal.name}</strong>: £${goal.saved.toFixed(2)} / £${goal.target.toFixed(2)}
+                <button class="add-to-goal-btn" data-index="${index}">Add</button>
+            `;
+            savingGoalsList.appendChild(li);
+        });
+
+        // Add event listeners for "Add" buttons
+        document.querySelectorAll('.add-to-goal-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.dataset.index;
+                const amount = parseFloat(prompt('Enter amount to add:'));
+                if (amount > 0 && savingGoals[index].saved + amount <= savingGoals[index].target) {
+                    savingGoals[index].saved += amount;
+
+                    // Treat the contribution as an expense
+                    addTransaction('expense', amount, 'Saving Goal');
+                    updateSavingGoalsUI();
+                }
+            });
+        });
+    }
+
+    // Add Transaction (already defined in your script)
+    function addTransaction(type, amount, category = null) {
+        const numericAmount = +amount;
+        if (isNaN(numericAmount) || numericAmount <= 0) {
+            alert('Please enter a valid positive amount.');
+            return false;
+        }
+        if (type === 'expense' && !category) {
+            alert('Please select a category for the expense.');
+            return false;
+        }
+        const newTransaction = {
+            id: generateID(),
+            type,
+            amount: numericAmount,
+            category: type === 'expense' ? category : null,
+            timestamp: new Date().toISOString()
+        };
+        transactions.push(newTransaction);
+        saveTransactions();
+        init(); // Re-initialize display (updates summary, activity list, and chart)
+        renderPieChart(); // Ensure the pie chart is updated
+        return true;
+    }
+
+    // Add Saving Goal
+    document.getElementById('add-saving-goal-btn').addEventListener('click', function () {
+        const goalName = document.getElementById('saving-goal-name').value;
+        const goalAmount = parseFloat(document.getElementById('saving-goal-amount').value);
+
+        if (goalName && goalAmount > 0) {
+            const goalList = document.getElementById('saving-goals-list');
+            const newGoal = document.createElement('li');
+            newGoal.classList.add('goal-item');
+            newGoal.innerHTML = `
+                <span class="goal-name">${goalName}</span>
+                <span class="goal-progress">£0 / £${goalAmount.toFixed(2)}</span>
+                <i class="fas fa-check-circle goal-completed" style="display: none;"></i>
+            `;
+            goalList.appendChild(newGoal);
+
+            // Clear input fields
+            document.getElementById('saving-goal-name').value = '';
+            document.getElementById('saving-goal-amount').value = '';
+        }
+    });
+
+    // Example: Mark a goal as completed
+    function markGoalAsCompleted(goalItem) {
+        const tickIcon = goalItem.querySelector('.goal-completed');
+        tickIcon.style.display = 'inline';
+        goalItem.style.backgroundColor = '#e8f5e9'; // Light green background
+    }
+});
 
 // Array to store transactions
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
