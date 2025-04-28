@@ -67,6 +67,21 @@
             <h3 style="margin-top: 20px;">Expense Breakdown</h3>
             <canvas id="expensePieChart" style="max-width: 100%;"></canvas>
             <p id="no-pie-chart-data" style="display: none; text-align: center; margin-top: 20px; color: #777;">No expense data available to display pie chart.</p>
+
+            <!-- Savings and Budget Progress Section -->
+            <div id="savings-budget-progress" style="margin-top: 30px;">
+                <h3>Savings and Budget Progress</h3>
+                <div class="progress-container">
+                    <label for="savings-progress">Savings:</label>
+                    <progress id="savings-progress" value="50" max="100"></progress>
+                    <span id="savings-percentage">50%</span>
+                </div>
+                <div class="progress-container">
+                    <label for="budget-progress">Budget:</label>
+                    <progress id="budget-progress" value="70" max="100"></progress>
+                    <span id="budget-percentage">70%</span>
+                </div>
+            </div>
         </aside>
             
     </main>

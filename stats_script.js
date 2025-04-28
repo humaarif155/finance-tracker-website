@@ -364,6 +364,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Example data for savings and budget (replace with real data from your backend or calculations)
+    const savingsPercentage = 50; // Example: 50% of savings goal achieved
+    const budgetPercentage = 70; // Example: 70% of budget used
+
+    // Update Savings Progress
+    const savingsProgress = document.getElementById('savings-progress');
+    const savingsPercentageText = document.getElementById('savings-percentage');
+    savingsProgress.value = savingsPercentage;
+    savingsPercentageText.textContent = `${savingsPercentage}%`;
+
+    // Update Budget Progress
+    const budgetProgress = document.getElementById('budget-progress');
+    const budgetPercentageText = document.getElementById('budget-percentage');
+    budgetProgress.value = budgetPercentage;
+    budgetPercentageText.textContent = `${budgetPercentage}%`;
+
     // --- Event Listeners ---
     if (timeframeSelect) {
         timeframeSelect.addEventListener('change', (event) => {

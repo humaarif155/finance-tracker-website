@@ -601,3 +601,66 @@ document.getElementById("add-category-btn").addEventListener("click", () => {
         alert("Please enter a valid category name.");
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savingGoals = [];
+    const activityList = document.getElementById('activity-list');
+    const savingGoalsList = document.getElementById('saving-goals-list');
+
+    // Add Saving Goal
+    document.getElementById('add-saving-goal-btn').addEventListener('click', () => {
+        const goalName = document.getElementById('saving-goal-name').value;
+        const goalAmount = parseFloat(document.getElementById('saving-goal-amount').value);
+
+        if (goalName && goalAmount > 0) {
+            savingGoals.push({ name: goalName, target: goalAmount, saved: 0 });
+            updateSavingGoalsUI();
+        }
+    });
+
+    // Update Saving Goals UI
+    function updateSavingGoalsUI() {
+        savingGoalsList.innerHTML = '';
+        savingGoals.forEach((goal, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <strong>${goal.name}</strong>: £${goal.saved.toFixed(2)} / £${goal.target.toFixed(2)}
+                <button class="add-to-goal-btn" data-index="${index}">Add</button>
+            `;
+            savingGoalsList.appendChild(li);
+        });
+
+        // Add event listeners for "Add" buttons
+        document.querySelectorAll('.add-to-goal-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.dataset.index;
+                const amount = parseFloat(prompt('Enter amount to add:'));
+                if (amount > 0 && savingGoals[index].saved + amount <= savingGoals[index].target) {
+                    savingGoals[index].saved += amount;
+                    addActivity('Saving Goal', 'Contribution', amount, savingGoals[index].name);
+                    updateSavingGoalsUI();
+                }
+            });
+        });
+    }
+
+    // Add Activity
+    function addActivity(category, type, amount, goalName = '') {
+        const date = new Date().toLocaleDateString();
+        const li = document.createElement('li');
+        li.textContent = `${date} - ${category} - ${type} - £${amount.toFixed(2)} ${goalName ? `(${goalName})` : ''}`;
+        activityList.appendChild(li);
+
+        // Update Activity Table
+        const tbody = document.querySelector('#transaction-history tbody');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${date}</td>
+            <td>${category}</td>
+            <td>${type}</td>
+            <td>£${amount.toFixed(2)}</td>
+            <td>${goalName}</td>
+        `;
+        tbody.appendChild(tr);
+    }
+});

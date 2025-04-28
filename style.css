@@ -565,3 +565,59 @@ body {
 .saving-goals-container .add-saving-goal button:hover {
     background-color: #0056b3;
 }
+
+/* Savings and Budget Progress Section */
+#savings-budget-progress {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#savings-budget-progress h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.progress-container {
+    margin-bottom: 15px;
+}
+
+.progress-container label {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #e6e6e6;
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #4caf50;
+    border-radius: 10px;
+}
+
+progress::-moz-progress-bar {
+    background-color: #4caf50;
+    border-radius: 10px;
+}
+
+#savings-percentage, #budget-percentage {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    color: #777;
+}
